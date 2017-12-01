@@ -4,11 +4,7 @@ const mongoose = require('mongoose');
 const Journal = require('../models/Journal').Journal;
 
 mongoose.Promise = Promise;
-mongoose.connect(process.env.MONGODB_URI, {
-  keepAlive: true,
-  reconnectTries: Number.MAX_VALUE,
-  useMongoClient: true
-});
+mongoose.connect(process.env.MONGODB_URI, { useMongoClient: true });
 
 const journals = [
   {
