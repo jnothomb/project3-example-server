@@ -9,6 +9,7 @@ const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
 
 const index = require('./routes/index');
+const journal = require('./routes/journal');
 
 const app = express();
 
@@ -52,12 +53,13 @@ app.use(passport.session());
 app.use(cors());
 
 app.use('/', index);
+app.use('/journal-entries', journal);
 
 // -- 404 and error handler
 
-app.use((req, res, next) => {
+app.use((req, res) => {
   res.status(404);
-  res.json({error: 'error.not-found'});
+  res.json({ error: 'error.not-found' });
 });
 
 app.use((err, req, res, next) => {
@@ -67,7 +69,7 @@ app.use((err, req, res, next) => {
   // only send response if the error ocurred before sending the response
   if (!res.headersSent) {
     res.status(500);
-    res.json({error: 'error.unexpected'});
+    res.json({ error: 'error.unexpected' });
   }
 });
 

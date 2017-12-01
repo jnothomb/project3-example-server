@@ -4,10 +4,12 @@
     "es6": true,
     "node": true
   },
-  "globals": {
-  },
+  "globals": {},
   "rules": {
-    "indent": [2, 2],
+    "indent": [
+      2,
+      2
+    ],
     "semi": [
       2,
       "always"
