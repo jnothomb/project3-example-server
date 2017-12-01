@@ -1,10 +1,9 @@
-require("dotenv").config();
-const bcrypt = require("bcrypt");
-const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
+require('dotenv').config();
+const bcrypt = require('bcrypt');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 
-// Require the Mongoose models
-const User = require("../models/User");
+const User = require('../models/User').User;
 
 passport.serializeUser((user, cb) => {
   cb(null, user.id);
@@ -28,11 +27,9 @@ passport.use(
           return next(err);
         }
         if (!user) {
-          req.flash("error", "Incorrect username");
           return next(null, false);
         }
         if (!bcrypt.compareSync(password, user.password)) {
-          req.flash("error", "Incorrect password");
           return next(null, false);
         }
         return next(null, user);
